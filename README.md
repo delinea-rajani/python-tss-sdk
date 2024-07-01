@@ -125,7 +125,7 @@ print(f"username: {serverSecret.fields['username'].value}\npassword: {serverSecr
 > Note: Add a try-except block to the code to get more detailed error messages.
 
 ```python
-from delinea.secrets.server import SecretServerError
+
 
 try:
     # code...
