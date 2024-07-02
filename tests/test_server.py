@@ -1,5 +1,4 @@
 import pytest
-
 from delinea.secrets.server import (
     AccessTokenAuthorizer,
     SecretServer,
@@ -17,15 +16,11 @@ def test_bad_url(env_vars, authorizer):
     )
     with pytest.raises(SecretServerError):
         bad_server.get_secret(env_vars["secret_id"])
-
-
 def test_token_url(env_vars, authorizer):
     assert (
         authorizer.token_url
         == f"https://{env_vars['tenant']}.secretservercloud.com/oauth2/token"
     )
-
-
 def test_api_url(secret_server, env_vars):
     assert (
         secret_server.api_url
@@ -38,14 +33,10 @@ def test_access_token_authorizer(env_vars, authorizer):
         f"https://{env_vars['tenant']}.secretservercloud.com/",
         AccessTokenAuthorizer(authorizer.get_access_token()),
     ).get_secret(env_vars["secret_id"])["id"] == int(env_vars["secret_id"])
-
-
 def test_server_secret(env_vars, secret_server):
     assert ServerSecret(**secret_server.get_secret(env_vars["secret_id"])).id == int(
         env_vars["secret_id"]
     )
-
-
 def test_server_secret_by_path(env_vars, secret_server):
     assert ServerSecret(
         **secret_server.get_secret_by_path(env_vars["secret_path"])
@@ -53,7 +44,6 @@ def test_server_secret_by_path(env_vars, secret_server):
 
 
 def test_server_folder_by_path(env_vars, secret_server):
-
     assert ServerFolder(
         **secret_server.get_folder_by_path(env_vars["folder_path"])
     ).id == int(env_vars["folder_id"])
