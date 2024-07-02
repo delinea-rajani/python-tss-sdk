@@ -493,7 +493,6 @@ class SecretServer:
         :return: a ``dict`` representation of the folder
         :rtype: ``dict``
         """
-        # print(f"========================================"+folder_path)
         path = "\\" + re.sub(r"[\\/]+", r"\\", folder_path).lstrip("\\").rstrip("\\")
 
         params = {"folderPath": path}
