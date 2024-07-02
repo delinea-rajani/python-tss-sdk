@@ -358,9 +358,8 @@ class SecretServer:
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(),
+                    headers=self.headers(), timeout=60
                 )
-                timeout=60
             ).text
 
     def get_folder_json(self, id, query_params=None, get_all_children=True):
@@ -389,9 +388,8 @@ class SecretServer:
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(),
-                )
-                timeout=60
+                    headers=self.headers(), timeout=60
+                ) 
             ).text
 
     def get_secret(self, id, fetch_file_attachments=True, query_params=None):
@@ -433,9 +431,8 @@ class SecretServer:
                             requests.get(
                                 endpoint_url,
                                 params=query_params,
-                                headers=self.headers(),
+                                headers=self.headers(),timeout=60
                             )
-                            timeout=60
                         )
         return secret
 
@@ -526,9 +523,8 @@ class SecretServer:
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(),
+                    headers=self.headers(), timeout=60
                 )
-                timeout=60
             ).text
 
     def lookup_folders(self, query_params=None):
