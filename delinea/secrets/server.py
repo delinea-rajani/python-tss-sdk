@@ -668,6 +668,3 @@ class SecretServerCloud(SecretServer):
 
     def __init__(self, tenant, authorizer: Authorizer, tld=DEFAULT_TLD):
         super().__init__(self.URL_TEMPLATE.format(tenant, tld), authorizer)
-        
-        
-        
