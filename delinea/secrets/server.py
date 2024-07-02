@@ -352,13 +352,16 @@ class SecretServer:
         endpoint_url = f"{self.api_url}/secrets/{id}"
 
         if query_params is None:
-            return self.process(requests.get(endpoint_url, headers=self.headers(), timeout=60)).text
+            return self.process(
+                requests.get(endpoint_url, headers=self.headers(), timeout=60)
+            ).text
         else:
             return self.process(
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(), timeout=60
+                    headers=self.headers(),
+                    timeout=60,
                 )
             ).text
 
@@ -382,14 +385,17 @@ class SecretServer:
             query_params["getAllChildren"] = "true"
 
         if query_params is None:
-            return self.process(requests.get(endpoint_url, headers=self.headers(), timeout=60)).text
+            return self.process(
+                requests.get(endpoint_url, headers=self.headers(), timeout=60)
+            ).text
         else:
             return self.process(
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(), timeout=60
-                ) 
+                    headers=self.headers(),
+                    timeout=60,
+                )
             ).text
 
     def get_secret(self, id, fetch_file_attachments=True, query_params=None):
@@ -424,14 +430,17 @@ class SecretServer:
                     endpoint_url = f"{self.api_url}/secrets/{id}/fields/{item['slug']}"
                     if query_params is None:
                         item["itemValue"] = self.process(
-                            requests.get(endpoint_url, headers=self.headers(), timeout=60)
+                            requests.get(
+                                endpoint_url, headers=self.headers(), timeout=60
+                            )
                         )
                     else:
                         item["itemValue"] = self.process(
                             requests.get(
                                 endpoint_url,
                                 params=query_params,
-                                headers=self.headers(),timeout=60
+                                headers=self.headers(),
+                                timeout=60,
                             )
                         )
         return secret
@@ -517,13 +526,16 @@ class SecretServer:
         endpoint_url = f"{self.api_url}/secrets"
 
         if query_params is None:
-            return self.process(requests.get(endpoint_url, headers=self.headers(), timeout=60)).text
+            return self.process(
+                requests.get(endpoint_url, headers=self.headers(), timeout=60)
+            ).text
         else:
             return self.process(
                 requests.get(
                     endpoint_url,
                     params=query_params,
-                    headers=self.headers(), timeout=60
+                    headers=self.headers(),
+                    timeout=60,
                 )
             ).text
 
@@ -568,7 +580,9 @@ class SecretServer:
         params = {"filter.folderId": folder_id}
         endpoint_url = f"{self.api_url}/secrets/search-total"
         params["take"] = self.process(
-            requests.get(endpoint_url, params=params, headers=self.headers(), timeout=60)
+            requests.get(
+                endpoint_url, params=params, headers=self.headers(), timeout=60
+            )
         ).text
         response = self.search_secrets(query_params=params)
 
