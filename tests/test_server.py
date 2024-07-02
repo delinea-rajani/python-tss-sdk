@@ -1,11 +1,11 @@
 import pytest
-
 from delinea.secrets.server import (
     AccessTokenAuthorizer,
     SecretServer,
     SecretServerClientError,
     SecretServerError,
     ServerSecret,
+    ServerFolder,
 )
 
 
@@ -51,10 +51,28 @@ def test_server_secret_by_path(env_vars, secret_server):
     ).id == int(env_vars["secret_id"])
 
 
+def test_server_folder_by_path(env_vars, secret_server):
+    assert ServerFolder(
+        **secret_server.get_folder_by_path(env_vars["folder_path"])
+    ).id == int(env_vars["folder_id"])
+
+
 def test_nonexistent_secret(secret_server):
     with pytest.raises(SecretServerClientError):
-        secret_server.get_secret(1000)
+        secret_server.get_secret(0)
+
+
+def test_nonexistent_folder(secret_server):
+    with pytest.raises(SecretServerClientError):
+        secret_server.get_folder(0)
 
 
 def test_server_secret_ids_by_folderid(env_vars, secret_server):
     assert type(secret_server.get_secret_ids_by_folderid(env_vars["folder_id"])) is list
+
+
+def test_server_child_folder_ids_by_folderid(env_vars, secret_server):
+    assert (
+        type(secret_server.get_child_folder_ids_by_folderid(env_vars["folder_id"]))
+        is list
+    )
